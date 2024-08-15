@@ -6,15 +6,18 @@ const port = process.env.PORT || 3000;
 const blogRoutes = require("./routes/blogRoutes");
 const connectDB = require("./database/db");
 
+app.listen(port, ()=>{
+  console.log("SERVER run");
+})
 // connect to Mnggo DB
 connectDB()
-  .then(app.listen(port, () => {
-    console.log(`server up & running on port ${port}`);
-  }))
-  .catch((err) => {
-    console.error('Failed to connect to the database', err);
-    process.exit(1);
-  });
+  // .then(app.listen(port, () => {
+  //   console.log(`server up & running on port ${port}`);
+  // }))
+  // .catch((err) => {
+  //   console.error('Failed to connect to the database', err);
+  //   process.exit(1);
+  // });
 
 // register view engine
 app.set("view engine", "ejs");
