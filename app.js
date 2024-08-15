@@ -29,7 +29,7 @@ app.set("view engine", "ejs");
 
 // middleware and static files
 app.use(express.static('public')); //set up Express to serve static files from public directory
-app.use(express.urlencoded({extended: true})); //Parses incoming URL-encoded request bodies, populating req.body.<to be able to use req.body in post method>
+app.use(express.urlencoded({ extended: true })); //Parses incoming URL-encoded request bodies, populating req.body.<to be able to use req.body in post method>
 app.use(morgan('dev')); //// use morgan pakage as a logger
 
 app.get("/", (req, res) => {
