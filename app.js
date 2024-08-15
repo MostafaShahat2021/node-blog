@@ -2,26 +2,19 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const mongoose = require("mongoose");
 const port = process.env.PORT || 8080;
 const blogRoutes = require("./routes/blogRoutes");
+const connectDB = require("./database/db");
 
 // connect to Mnggo DB
-const connectDB = async () => {
-  try {
-    mongoose.set('strictQuery', true); // improve data validation and potential error handling
-    const connect = await mongoose.connect(process.env.MONGO_URI)
-    console.log(`MongoDB Connected Successfully ${connect.connection.host}`);
-  } catch (err) {
-    console.error(err)
-    process.exit(1)
-  }
-}
 connectDB()
   .then(app.listen(port, () => {
     console.log(`server up & running on port ${port}`);
   }))
-
+  .catch((err) => {
+    console.error('Failed to connect to the database', err);
+    process.exit(1);
+  });
 
 // register view engine
 app.set("view engine", "ejs");
